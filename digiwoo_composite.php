@@ -6,6 +6,9 @@
  * Author: Ardika JM-Consulting
  */
 
+// Memuat kode tambahan dari file eksternal
+require_once 'digiwoo_composite_checkout.php';
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
