@@ -38,11 +38,25 @@ class DigiWoo_Composite_Checkout_Display {
     }
 
     public function get_products() {
-        echo json_encode(array('status' => 'success'));
+        $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : 0;
+        $products = wc_get_products(array('category' => array($category_id)));
+
+        if (is_wp_error($products)) {
+            // Log the error for debugging
+            error_log('WooCommerce Product Query Error: ' . $products->get_error_message());
+            echo json_encode(array('error' => 'Unable to fetch products.'));
+        } else {
+            $options = array();
+            foreach ($products as $product) {
+                $options[] = array(
+                    'id' => $product->get_id(),
+                    'name' => $product->get_name()
+                );
+            }
+            echo json_encode($options);
+        }
         wp_die();
     }
-
-
 
 }
 
