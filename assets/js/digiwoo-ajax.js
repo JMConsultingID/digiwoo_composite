@@ -9,6 +9,7 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'digiwoo_get_pages'
             },
+            dataType : 'json',
             success: function(response) {
                 console.log('Success:', response);
                 // Handle the response here, such as displaying the pages in a dropdown
