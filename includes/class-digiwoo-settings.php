@@ -58,7 +58,7 @@ class DigiWoo_Settings {
                 'name'     => __( 'Custom Checkout Page', 'digiwoo-composite' ),
                 'type'     => 'select',
                 'desc'     => __( 'Select the custom checkout page.', 'digiwoo-composite' ),
-                'id'       => 'wc_digiwoo_composite_custom_page_checkout'
+                'id'       => 'wc_digiwoo_composite_custom_page_checkout',
                 'options'  => $this->get_pages(),
                 'desc_tip' => true,
             ),
