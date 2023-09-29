@@ -68,7 +68,7 @@ class DigiWoo_Composite {
      */
     private function init_hooks() {
         add_action('wp_enqueue_scripts', array($this, 'load_assets'));
-        add_action('wp', array($this, 'display_product_categories'));
+        add_action('template_redirect', array($this, 'handle_composite_checkout'));
     }
 
     /**
@@ -79,35 +79,12 @@ class DigiWoo_Composite {
         wp_enqueue_script('digiwoo-composite-js', DIGIWOO_COMPOSITE_PLUGIN_URL . 'assets/js/frontend.js', array('jquery'), DIGIWOO_COMPOSITE_VERSION, true);
     }
 
-    public function display_product_categories() {
-        // Check if the plugin is enabled
-        if ('yes' !== get_option('wc_digiwoo_composite_enable_plugin')) {
-            return;
-        }
-        
-        // Check if the current page is the 'composite' page
-        if (is_page(get_option('wc_digiwoo_composite_custom_page_checkout'))) {
-            $args = array(
-                'taxonomy'   => 'product_cat',
-                'orderby'    => 'name',
-                'show_count' => 0,
-                'pad_counts' => 0,
-                'hierarchical' => 1,
-                'title_li'   => '',
-                'hide_empty' => 0,
-            );
-            
-            $all_categories = get_categories($args);
-            echo '<ul class="digiwoo_product_categories">';
-            foreach ($all_categories as $cat) {
-                if ($cat->category_parent == 0) {
-                    $category_id = $cat->term_id;
-                    echo '<li><a href="' . get_term_link($cat->slug, 'product_cat') . '">' . $cat->name . '</a></li>';
-                }       
-            }
-            echo '</ul>';
+    public function handle_composite_checkout() {
+        if(is_page(get_option('wc_digiwoo_composite_custom_page_checkout')) && get_option('wc_digiwoo_composite_enable_plugin') === 'yes') {
+            include_once DIGIWOO_COMPOSITE_PLUGIN_DIR . 'includes/class-digiwoo-composite-checkout-display.php';
         }
     }
+
 
 
 }
