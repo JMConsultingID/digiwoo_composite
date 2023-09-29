@@ -25,9 +25,10 @@ jQuery(document).ready(function($) {
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                // Log any AJAX request errors
-                console.error('AJAX Error:', textStatus, errorThrown);
+                // Log any AJAX request errors with more details
+                console.error('AJAX Error:', textStatus, errorThrown, jqXHR.responseText);
             }
+
         });
     });
 });
