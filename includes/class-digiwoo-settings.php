@@ -56,9 +56,11 @@ class DigiWoo_Settings {
             ),
             'custom_page_checkout' => array(
                 'name'     => __( 'Custom Checkout Page', 'digiwoo-composite' ),
-                'type'     => 'dropdown_pages',
+                'type'     => 'select',
                 'desc'     => __( 'Select the custom checkout page.', 'digiwoo-composite' ),
                 'id'       => 'wc_digiwoo_composite_custom_page_checkout'
+                'options'  => $this->get_pages(),
+                'desc_tip' => true,
             ),
             'section_end' => array(
                 'type'     => 'sectionend',
@@ -68,6 +70,16 @@ class DigiWoo_Settings {
 
         return apply_filters( 'wc_digiwoo_composite_settings', $settings );
     }
+
+    public function get_pages() {
+        $pages_options = array();
+        $pages = get_pages();
+        foreach ($pages as $page) {
+            $pages_options[$page->ID] = $page->post_title;
+        }
+        return $pages_options;
+    }
+
 
 }
 
