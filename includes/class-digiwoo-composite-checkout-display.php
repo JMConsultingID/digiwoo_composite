@@ -38,27 +38,10 @@ class DigiWoo_Composite_Checkout_Display {
     }
 
     public function get_products() {
-        error_log(print_r($_POST, true));
-        $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : 0;
-
-        $args = array(
-            'category' => array($category_id),
-            'limit' => -1,  // Get all products for the selected category
-        );
-
-        $products = wc_get_products($args);
-
-        $options = array();
-        foreach ($products as $product) {
-            $options[] = array(
-                'id' => $product->get_id(),
-                'name' => $product->get_name()
-            );
-        }
-
-        echo json_encode($options);
+        echo json_encode(array('status' => 'success'));
         wp_die();
     }
+
 
 
 }
