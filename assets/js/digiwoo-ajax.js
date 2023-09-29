@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
             url: digiwoo_params.ajax_url,
             type: 'POST',
             data: {
-                action: 'digiwoo_get_pages'
+                foo : foobar,
             },
             dataType : 'json',
             success: function(response) {
