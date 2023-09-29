@@ -38,6 +38,8 @@ class DigiWoo_Composite_Checkout_Display {
     }
 
     public function get_products() {
+        error_log('get_products function is called'); // Just for debugging
+
         $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : 0;
         $products = wc_get_products(array('category' => array($category_id)));
 
@@ -52,6 +54,7 @@ class DigiWoo_Composite_Checkout_Display {
         echo json_encode($options);
         wp_die();
     }
+
 }
 
 new DigiWoo_Composite_Checkout_Display();
