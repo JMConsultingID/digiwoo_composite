@@ -9,8 +9,9 @@ class DigiWoo_Composite_Checkout_Display {
     public function __construct() {
         add_shortcode('digiwoo_composite_checkout', array($this, 'display_checkout'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('wp_ajax_digiwoo_get_products', array($this, 'get_products'));
-        add_action('wp_ajax_nopriv_digiwoo_get_products', array($this, 'get_products'));
+        // Add an action to register the 'digiwoo_get_pages' AJAX action
+add_action('wp_ajax_digiwoo_get_pages', array($this, 'get_pages'));
+add_action('wp_ajax_nopriv_digiwoo_get_pages', array($this, 'get_pages'));
     }
 
     public function display_checkout() {
@@ -57,6 +58,22 @@ class DigiWoo_Composite_Checkout_Display {
         }
         wp_die();
     }
+
+    public function get_pages() {
+        $pages = get_pages();
+        $options = array();
+        
+        foreach ($pages as $page) {
+            $options[] = array(
+                'id' => $page->ID,
+                'title' => $page->post_title
+            );
+        }
+        
+        echo json_encode($options);
+        wp_die();
+    }
+
 
 }
 

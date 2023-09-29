@@ -7,11 +7,11 @@ jQuery(document).ready(function($) {
             url: digiwoo_params.ajax_url,
             type: 'POST',
             data: {
-                action: 'digiwoo_get_products',
-                category_id: category_id
+                action: 'digiwoo_get_pages'
             },
             success: function(response) {
                 console.log('Success:', response);
+                // Handle the response here, such as displaying the pages in a dropdown
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('AJAX Error:', textStatus, errorThrown);
