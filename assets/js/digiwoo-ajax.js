@@ -11,25 +11,11 @@ jQuery(document).ready(function($) {
                 category_id: category_id
             },
             success: function(response) {
-                try {
-                    var products = JSON.parse(response);
-                    var options = '';
-                    products.forEach(function(product) {
-                        options += '<option value="' + product.id + '">' + product.name + '</option>';
-                    });
-                    $('#digiwoo_product_select').html(options).show();
-
-                    // Log successful response to console
-                    console.log('Success:', response);
-                } catch (e) {
-                    console.error('Parsing error:', e);
-                }
+                console.log('Success:', response);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                // Log any AJAX request errors with more details
-                console.error('AJAX Error:', textStatus, errorThrown, jqXHR.responseText);
+                console.error('AJAX Error:', textStatus, errorThrown);
             }
-
         });
     });
 });
