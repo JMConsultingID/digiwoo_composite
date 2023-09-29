@@ -75,8 +75,6 @@ class DigiWoo_Composite {
      * Load frontend assets.
      */
     public function load_assets() {
-        wp_enqueue_style('digiwoo-composite-css', DIGIWOO_COMPOSITE_PLUGIN_URL . 'assets/css/frontend.css', array(), DIGIWOO_COMPOSITE_VERSION);
-        wp_enqueue_script('digiwoo-composite-js', DIGIWOO_COMPOSITE_PLUGIN_URL . 'assets/js/frontend.js', array('jquery'), DIGIWOO_COMPOSITE_VERSION, true);
     }
 
     public function handle_composite_checkout() {
