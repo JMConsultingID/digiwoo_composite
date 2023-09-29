@@ -10,12 +10,23 @@ jQuery(document).ready(function($) {
                 category_id: category_id
             },
             success: function(response) {
-                var products = JSON.parse(response);
-                var options = '';
-                products.forEach(function(product) {
-                    options += '<option value="' + product.id + '">' + product.name + '</option>';
-                });
-                $('#digiwoo_product_select').html(options).show();
+                try {
+                    var products = JSON.parse(response);
+                    var options = '';
+                    products.forEach(function(product) {
+                        options += '<option value="' + product.id + '">' + product.name + '</option>';
+                    });
+                    $('#digiwoo_product_select').html(options).show();
+
+                    // Log successful response to console
+                    console.log('Success:', response);
+                } catch (e) {
+                    console.error('Parsing error:', e);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Log any AJAX request errors
+                console.error('AJAX Error:', textStatus, errorThrown);
             }
         });
     });
